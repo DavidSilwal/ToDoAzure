@@ -36,5 +36,19 @@ namespace ToDoList5.Controllers
             var thisCategory = db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
             return View(thisCategory);
         }
+
+        public IActionResult Edit(int id)
+        {
+            var thisCategory = db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
+            return View(thisCategory);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Category category)
+        {
+            db.Entry(category).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
