@@ -106,3 +106,15 @@
         </ul>
     </div>
 </div>
+
+@model IEnumerable<ToDoList5.Models.Item>
+
+<html>
+<head>
+    <title>To Do List</title>
+</head>
+<body>
+    <h2>To Do List</h2>
+    <p>@Html.ActionLink("Task list", "Index", "Items")</p>
+</body>
+</html>
