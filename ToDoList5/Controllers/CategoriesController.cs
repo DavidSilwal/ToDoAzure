@@ -50,5 +50,20 @@ namespace ToDoList5.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public IActionResult Delete(int id)
+        {
+            var thisCategory = db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
+            return View(thisCategory);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var thisCategory = db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
+            db.Categories.Remove(thisCategory);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
