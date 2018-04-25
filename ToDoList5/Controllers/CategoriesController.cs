@@ -11,10 +11,22 @@ namespace ToDoList5.Controllers
 {
     public class CategoriesController : Controller
     {
-        private ToDoListContext db = new ToDoListContext();
-        public IActionResult Index()
+        private ICategoryRepository categoryRepo;  // New!
+
+        public CategoriesController(ICategoryRepository repo = null)
         {
-            List<Category> model = db.Categories.ToList();
+            if (repo == null)
+            {
+                this.categoryRepo = new EFCategoryRepository();
+            }
+            else
+            {
+                this.categoryRepo = repo;
+            }
+        }
+        public ViewResult Index()
+        {
+            List<Category> model = categoryRepo.Categories.ToList();
             return View(model);
         }
 
@@ -26,43 +38,43 @@ namespace ToDoList5.Controllers
         [HttpPost]
         public IActionResult Create(Category category)
         {
-            db.Categories.Add(category);
-            db.SaveChanges();
+            categoryRepo.Save(category);
+            //categoryRepo.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public IActionResult Details(int id)
         {
-            var thisCategory = db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
+            var thisCategory = categoryRepo.Categories.FirstOrDefault(categories => categories.CategoryId == id);
             return View(thisCategory);
         }
 
         public IActionResult Edit(int id)
         {
-            var thisCategory = db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
+            var thisCategory = categoryRepo.Categories.FirstOrDefault(categories => categories.CategoryId == id);
             return View(thisCategory);
         }
 
         [HttpPost]
         public IActionResult Edit(Category category)
         {
-            db.Entry(category).State = EntityState.Modified;
-            db.SaveChanges();
+            categoryRepo.Edit(category);
+            //categoryRepo.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
         {
-            var thisCategory = db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
+            var thisCategory = categoryRepo.Categories.FirstOrDefault(categories => categories.CategoryId == id);
             return View(thisCategory);
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            var thisCategory = db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
-            db.Categories.Remove(thisCategory);
-            db.SaveChanges();
+            var thisCategory = categoryRepo.Categories.FirstOrDefault(categories => categories.CategoryId == id);
+            categoryRepo.Remove(thisCategory);
+            //categoryRepo.SaveChanges();
             return RedirectToAction("Index");
         }
     }

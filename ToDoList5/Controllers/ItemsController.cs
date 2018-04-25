@@ -11,59 +11,72 @@ namespace ToDoList5.Controllers
 {
     public class ItemsController : Controller
     {
-        private ToDoListContext db = new ToDoListContext();
-        public IActionResult Index()
+        private IItemRepository itemRepo;  // New!
+
+        public ItemsController(IItemRepository repo = null)
         {
-            return View(db.Items.Include(items => items.Category).ToList());
+            if (repo == null)
+            {
+                this.itemRepo = new EFItemRepository();
+            }
+            else
+            {
+                this.itemRepo = repo;
+            }
+        }
+
+        public ViewResult Index()
+        {
+            return View(itemRepo.Items.Include(items => items.Category).ToList());
         }
 
         public IActionResult Details(int id)
         {
-            var thisItem = db.Items.FirstOrDefault(items => items.ItemId == id);
+            var thisItem = itemRepo.Items.FirstOrDefault(items => items.ItemId == id);
             return View(thisItem);
         }
 
         public IActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name");
+            ViewBag.CategoryId = new SelectList(itemRepo.Categories, "CategoryId", "Name");
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(Item item)
         {
-            db.Items.Add(item);
-            db.SaveChanges();
+            itemRepo.Items.Save(item);
+            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public IActionResult Edit(int id)
         {
-            var thisItem = db.Items.FirstOrDefault(items => items.ItemId == id);
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Name");
+            var thisItem = itemRepo.Items.FirstOrDefault(items => items.ItemId == id);
+            ViewBag.CategoryId = new SelectList(itemRepo.Categories, "CategoryId", "Name");
             return View(thisItem);
         }
 
         [HttpPost]
         public IActionResult Edit(Item item)
         {
-            db.Entry(item).State = EntityState.Modified;
-            db.SaveChanges();
+            itemRepo.Edit(item);
+            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
         {
-            var thisItem = db.Items.FirstOrDefault(items => items.ItemId == id);
+            var thisItem = itemRepo.Items.FirstOrDefault(items => items.ItemId == id);
             return View(thisItem);
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            var thisItem = db.Items.FirstOrDefault(items => items.ItemId == id);
-            db.Items.Remove(thisItem);
-            db.SaveChanges();
+            var thisItem = itemRepo.Items.FirstOrDefault(items => items.ItemId == id);
+            itemRepo.Remove(thisItem);
+            //db.SaveChanges();
             return RedirectToAction("Index");
         }
     }
