@@ -13,6 +13,8 @@ namespace ToDoList5.Models
         public IQueryable<Category> Items
         { get { return db.Categories; } }
 
+        public IQueryable<Category> Categories => throw new NotImplementedException();
+
         public Category Save(Category category)
         {
             db.Categories.Add(category);
