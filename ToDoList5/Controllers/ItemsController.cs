@@ -32,13 +32,13 @@ namespace ToDoList5.Controllers
 
         public IActionResult Details(int id)
         {
-            var thisItem = itemRepo.Items.FirstOrDefault(items => items.ItemId == id);
+            Item thisItem = itemRepo.Items.FirstOrDefault(items => items.ItemId == id);
             return View(thisItem);
         }
 
         public IActionResult Create()
         {
-            //ViewBag.CategoryId = new SelectList(itemRepo.Categories, "CategoryId", "Name");
+            ViewBag.CategoryId = new SelectList(itemRepo.Categories, "CategoryId", "Name");
             return View();
         }
 
@@ -53,7 +53,7 @@ namespace ToDoList5.Controllers
         public IActionResult Edit(int id)
         {
             var thisItem = itemRepo.Items.FirstOrDefault(items => items.ItemId == id);
-            //ViewBag.CategoryId = new SelectList(itemRepo.Categories, "CategoryId", "Name");
+            ViewBag.CategoryId = new SelectList(itemRepo.Categories, "CategoryId", "Name");
             return View(thisItem);
         }
 

@@ -10,10 +10,10 @@ namespace ToDoList5.Models
     {
         ToDoListContext db = new ToDoListContext();
 
-        public IQueryable<Category> Items
+        public IQueryable<Category> Categories
         { get { return db.Categories; } }
 
-        public IQueryable<Category> Categories => throw new NotImplementedException();
+        //public IQueryable<Category> Categories => throw new NotImplementedException();
 
         public Category Save(Category category)
         {

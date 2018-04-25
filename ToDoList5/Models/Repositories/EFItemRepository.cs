@@ -10,6 +10,9 @@ namespace ToDoList5.Models
     {
         ToDoListContext db = new ToDoListContext();
 
+        public IQueryable<Category> Categories
+        { get { return db.Categories; } }
+
         public IQueryable<Item> Items
         { get { return db.Items; } }
 

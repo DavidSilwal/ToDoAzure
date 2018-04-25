@@ -11,5 +11,6 @@ namespace ToDoList5.Models
         Item Save(Item item);
         Item Edit(Item item);
         void Remove(Item item);
+        IQueryable<Category> Categories { get; }
     }
 }

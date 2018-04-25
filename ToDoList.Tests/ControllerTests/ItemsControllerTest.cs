@@ -76,7 +76,7 @@ namespace ToDoList.Tests.ControllerTests
         }
 
         [TestMethod]
-        public void Mock_PostViewResultCreate_ViewResult()
+        public void Mock_PostViewResultCreate_RedirectToActionResult()
         {
             // Arrange
             Item testItem = new Item
@@ -89,11 +89,11 @@ namespace ToDoList.Tests.ControllerTests
             ItemsController controller = new ItemsController(mock.Object);
 
             // Act
-            var resultView = controller.Create(testItem) as ViewResult;
+            var resultView = controller.Create(testItem) as RedirectToActionResult;
 
 
             // Assert
-            Assert.IsInstanceOfType(resultView, typeof(ViewResult));
+            Assert.IsInstanceOfType(resultView, typeof(RedirectToActionResult));
 
         }
 
