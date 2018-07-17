@@ -18,7 +18,7 @@ namespace ToDoList5.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(@"Server=localhost;Port=8889;database=todolist5;uid=root;pwd=root;");
+            optionsBuilder.UseMySql(@"Server=localhost;Port=8889;database=todoazure;uid=root;pwd=root;");
         }
 
         public ToDoListContext(DbContextOptions<ToDoListContext> options)
