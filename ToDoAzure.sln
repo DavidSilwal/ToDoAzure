@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList5", "ToDoList5\ToDoList5.csproj", "{BE950FB8-8C1C-4CDB-BDDA-FCBA2FA5A960}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoAzure", "ToDoList5\ToDoAzure.csproj", "{BE950FB8-8C1C-4CDB-BDDA-FCBA2FA5A960}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Tests", "ToDoList.Tests\ToDoList.Tests.csproj", "{75C1230E-798A-4012-8515-AE943F577BDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Tests", "ToDoList.Tests\ToDoList.Tests.csproj", "{75C1230E-798A-4012-8515-AE943F577BDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
